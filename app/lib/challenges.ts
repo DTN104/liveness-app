@@ -72,8 +72,8 @@ export const CHALLENGES: Challenge[] = [
   {
     // Handled specially by the scanner (time-window depth-from-motion), not by detect().
     id: "parallax",
-    label: "Move your phone slowly side to side",
-    hint: "Keep your face in the oval while moving",
+    label: "Move your head or phone slowly side to side",
+    hint: "Move slowly and steadily — keep your face in the oval",
     need: 0,
     detect: () => false,
   },
