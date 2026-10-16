@@ -1,0 +1,338 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+:root {
+  --bg: #0b0f14;
+  --card: #141a22;
+  --line: #222c38;
+  --text: #e7eef6;
+  --muted: #8ea0b5;
+  --accent: #00e59b;
+  --accent2: #3aa0ff;
+  --danger: #ff5d6c;
+  --warn: #ffcc66;
+  --radius: 18px;
+}
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+body {
+  background: radial-gradient(1200px 800px at 50% -10%, #16202b 0%, var(--bg) 60%);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+.wrap {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+header h1 {
+  font-size: 20px;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+header p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.card {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--line);
+}
+.stage video,
+.stage canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+.guide {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  width: 62%;
+  aspect-ratio: 3/4;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.28);
+  pointer-events: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.guide.ok {
+  border-color: var(--accent);
+  border-style: solid;
+  box-shadow: 0 0 0 4px rgba(0, 229, 155, 0.12) inset;
+}
+.badge {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  font-size: 11px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  backdrop-filter: blur(6px);
+}
+
+.challenge {
+  text-align: center;
+  padding: 6px 0 2px;
+}
+.challenge .big {
+  font-size: 18px;
+  font-weight: 600;
+  min-height: 26px;
+}
+.challenge .sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+  min-height: 18px;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line);
+  transition: 0.3s;
+}
+.dot.active {
+  background: var(--accent2);
+  transform: scale(1.25);
+}
+.dot.done {
+  background: var(--accent);
+}
+
+.timer {
+  height: 4px;
+  background: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 14px;
+}
+.timer > div {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transition: width 0.1s linear;
+}
+
+.card button {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  background: linear-gradient(180deg, #00f0a4, #00c987);
+  color: #04120c;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.card button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.card button.ghost {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-weight: 500;
+}
+.row {
+  display: flex;
+  gap: 10px;
+}
+.row button {
+  flex: 1;
+}
+
+.result {
+  text-align: center;
+  padding: 6px 0;
+}
+.result .title {
+  font-size: 18px;
+  font-weight: 700;
+}
+.result.pass .title {
+  color: var(--accent);
+}
+.result.fail .title {
+  color: var(--danger);
+}
+.result .meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.6;
+}
+
+.banner {
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid;
+}
+.banner.warn {
+  color: #3a2f14;
+  background: var(--warn);
+  border-color: #e6b84d;
+}
+.banner.err {
+  color: #2a0d11;
+  background: var(--danger);
+  border-color: #ff8b96;
+}
+
+details {
+  margin-top: 4px;
+}
+summary {
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 13px;
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+.debug {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  color: var(--muted);
+  background: #0d131a;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  white-space: pre-wrap;
+  line-height: 1.7;
+}
+.foot {
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.6;
+}
+a {
+  color: var(--accent2);
+}
+
+.captoggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+}
+.captoggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  flex: none;
+}
+.capnote {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+.galhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.galtitle {
+  font-size: 14px;
+  font-weight: 600;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+.capItem {
+  background: #0d131a;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.capItem img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  display: block;
+}
+.capMeta {
+  font-size: 10px;
+  color: var(--muted);
+  padding: 6px 8px 2px;
+}
+.capActions {
+  display: flex;
+  gap: 6px;
+  padding: 6px 8px 8px;
+}
+.card button.small {
+  width: auto;
+  flex: 1;
+  padding: 7px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 9px;
+}
+.card button.ghost.danger {
+  color: var(--danger);
+  border-color: rgba(255, 93, 108, 0.4);
+}
