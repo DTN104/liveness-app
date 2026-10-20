@@ -14,4 +14,7 @@ export const CONFIG = {
   parallaxMinMotion: 0.10,    // min normalized face displacement required
   parallaxResidualFloor: 0.004, // below => planar/flat (photo or screen)
   parallaxResidualCeil: 0.10,  // above => too shaky / tracking noise
+  // Face verification (1:1 identity) tuning
+  faceApiModelDir: "/models/face-api", // self-hosted face-api weights
+  matchThreshold: 0.5,        // Euclidean distance below this => same person
 };

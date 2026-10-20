@@ -9,6 +9,7 @@ import {
 } from "~/lib/challenges";
 import { similarityResidual, globalDisplacement } from "~/lib/parallax";
 import { saveCapture } from "~/lib/captureStore";
+import { FaceAuthPanel } from "./FaceAuthPanel";
 
 type Status = "loading" | "ready" | "error";
 
@@ -349,6 +350,7 @@ export function LivenessScanner({ onCaptureSaved }: { onCaptureSaved: () => void
     status === "loading" ? "Loading model…" : status === "error" ? "Unavailable" : scanning ? "Scanning…" : "Start scan";
 
   return (
+    <>
     <div className="card">
       <div className="stage">
         <video ref={videoRef} playsInline muted />
@@ -426,5 +428,7 @@ export function LivenessScanner({ onCaptureSaved }: { onCaptureSaved: () => void
         </pre>
       </details>
     </div>
+    <FaceAuthPanel videoRef={videoRef} ready={status === "ready"} />
+    </>
   );
 }
